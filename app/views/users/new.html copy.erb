@@ -1,0 +1,53 @@
+<h1>New User</h1>
+<%= form_for @user do |f| %>
+<!-- kod wyświetlający błędy --> 
+<p>
+<%= f.label :login %> <br />
+<%= f.text_field :login %> 
+</p>
+<p>
+<%= f.label :email %> <br />
+<%= f.email_field :email %>
+</p> 
+<p>
+<%= f.label :password %> <br />
+<%= f.password_field :password %> </p>
+</p>
+<p>
+<%= f.label :password_confirmation %> <br />
+<%= f.password_field :password_confirmation %>
+</p>
+<p>
+<%= f.label :name %> <br />
+<%= f.text_field :name %>
+</p>
+<p>
+<%= f.label :surname%> <br />
+<%= f.text_field :surname %>
+</p>
+<p>
+<%= f.label :city %> <br />
+<%= f.text_field :city %>
+</p>
+<p>
+<%= f.label :street %> <br />
+<%= f.text_field :street %>
+</p>
+<p>
+<%= f.label :building %> <br />
+<%= f.text_field :building %>
+</p>
+<p>
+<%= f.label :apartment %> <br />
+<%= f.text_field :apartment %>
+</p>
+<p>
+<%= f.label :zip_code %> <br />
+<%= f.text_field :zip %>
+</p>
+<div class="actions">
+  <%= f.submit %>
+</div>
+<% end %>
+
+<%= render 'form' %>

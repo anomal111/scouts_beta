@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  ordinal: 1
+  amount: 1
+  completed: MyString
+  price: 1.5
+
+two:
+  ordinal: 1
+  amount: 1
+  completed: MyString
+  price: 1.5

@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @issue.date %>
+</p>
+
+<p>
+  <strong>Mark:</strong>
+  <%= @issue.mark %>
+</p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @issue.title %>
+</p>
+
+<p>
+  <strong>Picture:</strong>
+  <%= @issue.picture %>
+</p>
+
+<p>
+  <strong>Volume:</strong>
+  <%= @issue.volume %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @issue.price %>
+</p>
+<% if can? :update, @issue %>>
+	<%= link_to 'Edit', edit_issue_path(@issue) %> |
+<% end %>
+<%= link_to 'Back', issues_path %>
