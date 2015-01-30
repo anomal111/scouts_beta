@@ -1,0 +1,21 @@
+<div class="well">
+
+  <div class="row">
+		<div class="col-xs-2">
+			<%= image_tag issue.picture.url(:thumb) %>
+		</div>
+    <div class="col-xs-6">
+      <h4><%= issue.title %></h4>
+			<p><%= issue.mark %></p>
+			<p><%= issue.date %></p>
+    </div>
+    <div class="col-xs-4">
+      
+      <%= form_for order_item, remote: true do |f| %>
+      <h4 class="text-right">Unit Price: <span style="color: green"><%= number_to_currency issue.price %></span></h4>
+				
+      <% end %>
+    </div>
+    
+  </div>
+</div>

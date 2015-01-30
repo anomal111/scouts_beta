@@ -3,10 +3,18 @@ class ApplicationController < ActionController::Base
 
   #filter_parameter_logging :password, :password_confirmation # there are underscores :-|
 
-  helper_method :current_user_session, :current_user
+  helper_method :current_user_session, :current_user, :current_order
 
   def access_denied(exception)
       redirect_to admin_organizations_path, :alert => exception.message
+  end
+  
+  def current_order
+    if !session[:order_id].nil?
+      Order.find(session[:order_id])
+    else
+      Order.new
+    end
   end
     
   private

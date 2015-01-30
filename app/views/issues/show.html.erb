@@ -17,7 +17,7 @@
 
 <p>
   <strong>Picture:</strong>
-  <%= @issue.picture %>
+ <td><%= image_tag @issue.picture.url(:big) %></td>
 </p>
 
 <p>
@@ -29,7 +29,4 @@
   <strong>Price:</strong>
   <%= @issue.price %>
 </p>
-<% if can? :update, @issue %>>
-	<%= link_to 'Edit', edit_issue_path(@issue) %> |
-<% end %>
 <%= link_to 'Back', issues_path %>

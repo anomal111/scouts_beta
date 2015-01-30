@@ -6,6 +6,7 @@ class IssuesController < ApplicationController
   # GET /issues.json
   def index
     @issues = Issue.all
+    @order_item = current_order.order_items.new
   end
 
   # GET /issues/1
@@ -61,6 +62,8 @@ class IssuesController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

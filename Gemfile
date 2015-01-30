@@ -45,7 +45,7 @@ gem 'devise'
 gem 'authlogic'
 
 # Authorization
-gem 'cancan'
+gem 'cancancan', '~> 1.10'
 
 # Use Polish language
 gem 'polish'
@@ -55,6 +55,12 @@ gem 'protected_attributes'
 
 # ActiveAdmin
 gem 'activeadmin', github: 'activeadmin'
+
+# File upload
+gem 'paperclip'
+
+# Shopping cart
+gem 'acts_as_shopping_cart', '~> 0.2.1'
 
 
 

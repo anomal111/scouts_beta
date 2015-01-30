@@ -45,6 +45,8 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
+    acts_as_shopping_cart (0.2.2)
+      activerecord (~> 4)
     arbre (1.0.3)
       activesupport (>= 3.0.0)
     arel (5.0.1.20140414130214)
@@ -58,7 +60,11 @@ GEM
       sass (~> 3.2)
       thor
     builder (3.2.2)
-    cancan (1.6.10)
+    cancancan (1.10.1)
+    climate_control (0.0.3)
+      activesupport (>= 3.0)
+    cocaine (0.5.5)
+      climate_control (>= 0.0.3, < 1.0)
     coffee-rails (4.0.1)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.0)
@@ -111,6 +117,11 @@ GEM
     minitest (5.5.1)
     multi_json (1.10.1)
     orm_adapter (0.5.0)
+    paperclip (4.2.1)
+      activemodel (>= 3.0.0)
+      activesupport (>= 3.0.0)
+      cocaine (~> 0.5.3)
+      mime-types
     polish (0.1.6)
       bundler
       i18n
@@ -194,12 +205,14 @@ PLATFORMS
 
 DEPENDENCIES
   activeadmin!
+  acts_as_shopping_cart (~> 0.2.1)
   authlogic
-  cancan
+  cancancan (~> 1.10)
   coffee-rails (~> 4.0.0)
   devise
   jbuilder (~> 2.0)
   jquery-rails
+  paperclip
   polish
   protected_attributes
   rails (= 4.1.8)

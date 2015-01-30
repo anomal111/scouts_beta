@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150124201354) do
+ActiveRecord::Schema.define(version: 20150130174559) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -47,6 +47,15 @@ ActiveRecord::Schema.define(version: 20150124201354) do
   add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true
   add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
 
+  create_table "cart_items", force: true do |t|
+    t.integer "owner_id"
+    t.string  "owner_type"
+    t.integer "quantity"
+    t.integer "item_id"
+    t.string  "item_type"
+    t.float   "price"
+  end
+
   create_table "issues", force: true do |t|
     t.date     "date"
     t.string   "mark"
@@ -56,7 +65,25 @@ ActiveRecord::Schema.define(version: 20150124201354) do
     t.float    "price"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "picture_file_name"
+    t.string   "picture_content_type"
+    t.integer  "picture_file_size"
+    t.datetime "picture_updated_at"
+    t.boolean  "active"
   end
+
+  create_table "order_items", force: true do |t|
+    t.integer  "issue_id"
+    t.integer  "order_id"
+    t.decimal  "unit_price"
+    t.integer  "quantity"
+    t.decimal  "total_price"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "order_items", ["issue_id"], name: "index_order_items_on_issue_id"
+  add_index "order_items", ["order_id"], name: "index_order_items_on_order_id"
 
   create_table "order_positions", force: true do |t|
     t.integer  "ordinal"
@@ -67,6 +94,24 @@ ActiveRecord::Schema.define(version: 20150124201354) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "order_statuses", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "orders", force: true do |t|
+    t.decimal  "subtotal"
+    t.decimal  "tax"
+    t.decimal  "shipping"
+    t.decimal  "total"
+    t.integer  "order_status_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "orders", ["order_status_id"], name: "index_orders_on_order_status_id"
 
   create_table "user_sessions", force: true do |t|
     t.string   "session_id", null: false

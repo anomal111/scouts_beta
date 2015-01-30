@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+  get 'order_items/create'
+
+  get 'order_items/update'
+
+  get 'order_items/destroy'
+
+  get 'carts/show'
+
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   get 'user_sessions/new'
@@ -38,7 +46,11 @@ Rails.application.routes.draw do
   resource :user, :as => 'account'  # a convenience route
   post 'user_sessions/create'
   get 'signup' => 'users#new', :as => :signup
-  root :to => 'users#new'
+  root :to => 'issues#index'
+
+  
+  resource :cart, only: [:show]
+  resources :order_items, only: [:create, :update, :destroy]
 
   # Trzeba skonfigurowac strone startowa, np.
   #root :to => "issues#index"
