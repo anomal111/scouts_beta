@@ -60,8 +60,13 @@ gem 'activeadmin', github: 'activeadmin'
 gem 'paperclip'
 
 # Shopping cart
-gem 'acts_as_shopping_cart', '~> 0.2.1'
+#gem 'acts_as_shopping_cart', '~> 0.2.1'
 
+# Bootstrap
+gem 'bootstrap-sass', '~> 3.2.0'
+gem 'autoprefixer-rails'
 
+# FontAwesome
+gem "font-awesome-rails"
 
 

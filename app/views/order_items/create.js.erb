@@ -1,6 +1,6 @@
 <% if @order.errors.any? || @order_item.errors.any? %>
-alert("not valid.")
+	$(".messages").append("<p class=\"bg-error\">Wystąpił problem. Prosimy spróbować ponownie poźniej.</p>")
 <% else %>
   $(".cart-text").html("<%= escape_javascript(render 'layouts/cart_text') %>")
-	$(".messages").append("<p class=\"bg-success\">Item added to cart!</p>")
+	$(".messages").append("<p class=\"bg-success\">Produkt dodany do karty!</p>")
 <% end %>

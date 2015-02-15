@@ -3,6 +3,7 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
+    @user.build_address
   end
 
   def create
@@ -39,10 +40,17 @@ class UsersController < ApplicationController
     end
   end
   
+  def my_orders
+    @orders = Order.all.select { |order| order.user_id == current_user.id }
+  end
+  
   private
     # Never trust parameters from the scary internet, only allow the white list through.
+    #def user_params
+      #params.require(:user).permit(:login, :password, :password_confirmation, :email)
+      #end
     def user_params
-      params.require(:user).permit(:login, :password, :password_confirmation, :email)
+      params.require(:user).permit(:login, :password, :role, :admin, :email, address_attributes: [:id, :name, :surname, :street, :house_number, :apartment_number, :city, :zip_code])
     end
 
 end

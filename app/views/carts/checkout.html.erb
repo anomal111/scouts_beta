@@ -1,0 +1,186 @@
+<div class="row">
+  <div class=" col-md-12">
+    <% if !@item.nil? && @item.errors.any? %>
+        <div class="alert alert-danger">
+          <ul>
+            <% @item.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+    <% if @items.size == 0 %>
+        <p class="text-center">
+          Twój koszyk jest pusty. Proszę <%= link_to "wróć", root_path %> i dodaj coś do koszyka.
+        </p>
+    <% else %>
+        <% @items.each do |item| %>
+            <div class="row">
+
+              <div class="col-md-6">
+                <div class="row">
+                  <div class="col-md-6">
+                    <p><%= image_tag item.issue.picture.url(:thumb) %></p>
+                  </div>
+                  <div class="col-md-6">
+                    <h4><%= item.issue.title %></h4>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="col-md-6">
+                      <% #if item.commision == true %>
+                          <!--Zakup w komisie-->
+                      <% #end %>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <h4 class="text-right">Cena:
+                          <span style="color: green"><%= number_to_currency item.unit_price %></span></h4>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <!-- end of row -->
+        <% end %>
+        <h4 class="text-right">Suma:
+          <%= "#{number_to_currency current_order.subtotal}" %></h4>
+        <h4 class="text-right">Podatek VAT:
+          <%= "#{number_to_currency current_order.tax}" %></h4>
+        <h4 class="text-right">Dostawa:
+          <%= "#{number_to_currency current_order.shipping}" %></h4>
+        <h4 class="text-right">Suma całkowita: <span style="color: green">
+        <%= "#{number_to_currency current_order.total}" %></span></h4>
+    <% end %>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <%= form_for @order, :html => {:class => 'form-horizontal'} do |o| %>
+        <% if @order.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(@order.errors.count, "error") %> prohibited this checkout from being saved:</h2>
+
+              <ul>
+                <% @order.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+        <% end %>
+				
+        <h1>Adres</h1>
+        <%= o.fields_for :address do |b| %>
+            <div class="form-group">
+              <%= b.label :name, :class => 'col-sm-2 control-label' %>
+              <div class="col-sm-10">
+                <%= b.text_field :name, id: 'name', :class => 'form-control' %>
+              </div>
+            </div>
+            <div class="form-group">
+              <%= b.label :surname, :class => 'col-sm-2 control-label' %>
+              <div class="col-sm-10">
+                <%= b.text_field :surname, :class => 'form-control' %>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <%= b.label :street, :class => 'col-sm-2 control-label' %>
+              <div class="col-sm-10">
+                <%= b.text_field :street, :class => 'form-control' %>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <%= b.label :house_number, :class => 'col-sm-2 control-label' %>
+              <div class="col-sm-10">
+                <%= b.text_field :house_number, :class => 'form-control' %>
+              </div>
+            </div>
+            <div class="form-group">
+              <%= b.label :apartment_number, :class => 'col-sm-2 control-label' %>
+              <div class="col-sm-10">
+                <%= b.text_field :apartment_number, :class => 'form-control' %>
+              </div>
+            </div>
+            <div class="form-group">
+              <%= b.label :city, :class => 'col-sm-2 control-label' %>
+              <div class="col-sm-10">
+                <%= b.text_field :city, :class => 'form-control' %>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <%= b.label :zip_code, :class => 'col-sm-2 control-label' %>
+              <div class="col-sm-10">
+                <%= b.text_field :zip_code, :class => 'form-control' %>
+              </div>
+            </div>
+        <% end %>
+				<%= o.hidden_field :order_status_id, value: '2' %>
+        <%= o.hidden_field :check, value: 'true' %>
+        <% if current_user %>
+            <%= o.hidden_field :user_id, value: current_user.id %>
+        <%end%>
+
+        <% if current_user && current_user.role == 'koordynator' %>
+            <div class="form-group">
+              <%= o.label "Tarmin zapłaty", :class => 'col-sm-2 control-label' %>
+              <div class="col-sm-10">
+              <%= o.date_select :payment, :class => 'form-control' %>
+                </div>
+            </div>
+        <% end %>
+
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <%= o.submit "Złóż zamówienie", :class => "btn btn-success" %>
+          </div>
+        </div>
+    <% end %>
+    <% if current_user %>
+        <div class="form-horizontal">
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <button class="btn btn-primary" onclick="update_address_fields()" id="update_fields_button">Użyj mojego
+                adresu
+              </button>
+            </div>
+          </div>
+        </div>
+    <% end %>
+  </div>
+</div>
+
+<script>
+    function update_address_fields() {
+        <% if current_user %>
+        var customer_name = "<%= current_user.address.name %>";
+        var customer_surname = "<%= current_user.address.surname %>";
+        var customer_street = "<%= current_user.address.street %>";
+        var customer_house = "<%= current_user.address.house_number %>";
+        var customer_apartment = "<%= current_user.address.apartment_number %>";
+        var customer_city = "<%= current_user.address.city %>";
+        var customer_zip = "<%= current_user.address.zip_code %>";
+        //console.log(customer_name + " " + customer_surname + " " + customer_street + " " + customer_house + " " + customer_city + " " + customer_zip);
+        if (customer_name == "" || customer_surname == "" || customer_street == "" || customer_house == "" || customer_city == "" || customer_zip == "") {
+            alert("Brak adresu lub niepełny, proszę wpisać adres ręcznie!");
+            $("#update_fields_button").prop("disabled", true);
+        } else {
+            $("#name").val(customer_name);
+            $("#order_address_attributes_surname").val(customer_surname);
+            $("#order_address_attributes_street").val(customer_street);
+            $("#order_address_attributes_house_number").val(customer_house);
+            $("#order_address_attributes_apartment_number").val(customer_apartment);
+            $("#order_address_attributes_city").val(customer_city);
+            $("#order_address_attributes_zip_code").val(customer_zip);
+        }
+        <%end%>
+    }
+</script>

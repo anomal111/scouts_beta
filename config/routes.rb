@@ -23,19 +23,18 @@ Rails.application.routes.draw do
 
   get 'users/update'
 
-  resources :order_positions
+  #resources :order_positions
 
   resources :issues
   
   resources :users, :only => [:new, :create,:edit,:update] 
-  # get "users/new"
-  # get "users/edit"
-  # ...
+  resources :users do
+    member do
+      get 'my_orders', :action => :my_orders
+    end
+  end
   
-  #resource :user_session, :only => [:new, :create, :destroy] 
-  #get "user_session/new"
-  #get "user_session/create"
-  #get "user_session/destroy"
+  resources :addresses
   
   resources :user_sessions
 
@@ -50,7 +49,16 @@ Rails.application.routes.draw do
 
   
   resource :cart, only: [:show]
+  resource :carts, only: [:show, :checkout, :checkout_save, :success]
+  resources :carts do
+    collection do
+      get 'checkout', :action => :checkout
+      get 'checkout_save', :action => :checkout_save
+    end
+  end
   resources :order_items, only: [:create, :update, :destroy]
+  
+  resources :orders
 
   # Trzeba skonfigurowac strone startowa, np.
   #root :to => "issues#index"

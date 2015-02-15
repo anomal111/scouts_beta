@@ -1,9 +1,13 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery 
-
+  before_action :set_locale
   #filter_parameter_logging :password, :password_confirmation # there are underscores :-|
 
   helper_method :current_user_session, :current_user, :current_order
+  
+  def set_locale
+    I18n.locale = params[:locale] || I18n.default_locale
+  end
 
   def access_denied(exception)
       redirect_to admin_organizations_path, :alert => exception.message
