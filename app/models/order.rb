@@ -1,20 +1,22 @@
 class Order < ActiveRecord::Base
-  belongs_to :order_status
   has_many :order_items
-  has_one :address
+  has_one :address, :as => :shipping
   accepts_nested_attributes_for :address
+  attr_accessible :address_attributes, :payment, :status, :user_id
   
   before_create :set_order_status
   before_save :update_subtotal
   before_save :update_shipping
   before_save :update_total
   
+  STATUSES = %i[oczekujące w_realizacji zapłacone zrealizowane]
+   
   def subtotal
     order_items.collect { |oi| oi.valid? ? (oi.quantity * oi.unit_price) : 0 }.sum
   end
   private
     def set_order_status
-      self.order_status_id = 1
+      self.status = 'oczekujące'
     end
 
     def update_subtotal

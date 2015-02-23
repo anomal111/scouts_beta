@@ -1,0 +1,10 @@
+<%= form_for @item do |f| %>
+    <!-- kod wyświetlający błędy -->
+    <p>
+      <%= f.label :sent %> <br />
+      <%= f.select :sent, options_for_select(OrderItem::SENTS) %>
+      <%= f.hidden_field :order_id, value: @item.order_id %>
+
+    <p><%= f.submit "Submit" %> </p>
+<% end %>
+

@@ -1,1 +1,1 @@
-<i class="fa fa-shopping-cart"></i><%= link_to "#{current_order.order_items.size} Artykuł(ów) w koszyku ( #{number_to_currency current_order.subtotal} )", cart_path, class: "btn btn-link" %>
+<i class="fa fa-shopping-cart"></i> <%= link_to "#{current_order.order_items.size} Artykuł(ów) w koszyku ( #{number_to_currency current_order.subtotal} )", cart_path %>

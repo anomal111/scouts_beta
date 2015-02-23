@@ -1,0 +1,10 @@
+1. komunikat po zlozeniu zamowienia (z numerem konta) // DONE
+2. archiwum // DONE
+3. FRONT // DONE
+4. JS przy pierwszym dodaniu produktu do karty
+5. walidacje
+6. naprawic "back" przy nieudanym checkoucie // DONE
+7. lista zlozonych zamowien dla usera // DONE
+8. spolszczenie
+9. redirecty w active admin // DONE
+10. wyczyscic // DONE

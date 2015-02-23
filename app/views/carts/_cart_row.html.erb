@@ -1,21 +1,25 @@
 <div class="well">
 
   <div class="row">
-		<div class="col-xs-2">
+		<div class="col-md-2">
 			<%= image_tag issue.picture.url(:thumb) %>
 		</div>
-    <div class="col-xs-6 issue-desc">
+    <div class="col-md-6 issue-desc">
       <h4>Tytuł: <span><%= issue.title %></span></h4>
 			<p class="price">Cena jednostkowa: <span><%= number_to_currency issue.price %></span></p>
 			<p>Numer: <span><%= issue.mark %></span></p>
 			<p>Data: <span><%= issue.date %></span></p>
     </div>
-    <div class="col-xs-4">
+    <div class="col-md-4">
       <%= form_for order_item, remote: true do |f| %>
-      	<%= f.number_field :quantity, value: order_item.quantity.to_i, class: "form-control", min: 1 %>
-      	<%= f.hidden_field :issue_id, value: issue.id %>
-      	<%= f.submit "Zmień ilość", class: "btn btn-primary" %>
-      	<%= link_to "Usuń", order_item, { data: { confirm: "Czy na pewno chcesz usunąć '#{order_item.issue.title}' z koszyka?" }, method: :delete, remote: true, class: "btn btn-danger" } %>
+				<div class="form-group">
+	      		<%= f.number_field :quantity, value: order_item.quantity.to_i, class: "form-control", min: 1 %>
+	      		<%= f.hidden_field :issue_id, value: issue.id %>
+				</div>
+				<div class="form-group">
+	      	<%= f.submit "Zmień ilość", class: "btn btn-primary" %>
+	      	<%= link_to "Usuń", order_item, { data: { confirm: "Czy na pewno chcesz usunąć '#{order_item.issue.title}' z koszyka?" }, method: :delete, remote: true, class: "btn btn-danger" } %>
+				</div>
 			<% end %>
     </div>
     

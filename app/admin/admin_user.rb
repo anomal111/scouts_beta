@@ -1,4 +1,5 @@
 ActiveAdmin.register AdminUser do
+  menu :label => "Administratorzy"
   permit_params :email, :password, :password_confirmation
   
   index do

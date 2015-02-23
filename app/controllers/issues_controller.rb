@@ -5,7 +5,7 @@ class IssuesController < ApplicationController
   # GET /issues
   # GET /issues.json
   def index
-    @issues = Issue.all
+    @issues = Issue.where("volume > ?", 0)
     @order_item = current_order.order_items.new
   end
 

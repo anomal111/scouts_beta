@@ -1,0 +1,85 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require font-awesome
+ *= require_self
+ */
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+body { 
+  /*background: url(moro.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;*/
+	background:#343434;
+	font-family: 'Source Sans Pro', sans-serif;
+}
+
+.navbar, .content{
+	&:after {
+	  background: -webkit-linear-gradient(0deg, #1abc9c 10%, #2ecc71 10%, #2ecc71 12.5%, #3498db 12.5%, #3498db 28%, #9b59b6 28%, #9b59b6 35%, #34495e 35%, #34495e 60%, #f1c40f 60%, #f1c40f 69%, #e67e22 69%, #e67e22 83%, #e74c3c 83%, #e74c3c 88%, #ecf0f1 88%, #ecf0f1 96%, #95a5a6 96%);
+	  background: linear-gradient(90deg, #1abc9c 10%, #2ecc71 10%, #2ecc71 12.5%, #3498db 12.5%, #3498db 28%, #9b59b6 28%, #9b59b6 35%, #34495e 35%, #34495e 60%, #f1c40f 60%, #f1c40f 69%, #e67e22 69%, #e67e22 83%, #e74c3c 83%, #e74c3c 88%, #ecf0f1 88%, #ecf0f1 96%, #95a5a6 96%);
+		width:100%;
+		height:5px;
+	}
+}
+
+
+
+.content{background:white;}
+.footer{background:#252525; 
+	.footer-desc{color:#999;
+		.fa, a{
+			&:hover{text-decoration:none;}
+		}
+	}
+	.footer-logo{padding:40px 0; display:block; 
+		img{max-width:100%;}
+	} 
+}
+
+@media(max-width:991px){
+	.footer{
+		.text-right,.footer-logo{text-align:center;}
+	}
+}
+
+.navbar-nav.navbar-right{
+	&:last-child{
+		margin-right:0;
+	}
+}
+
+.single-issue-grid{
+	.form-horizontal {
+		.control-label{text-align:left;}
+		button{width:100%;}
+	}
+	
+	
+}
+
+.well{box-shadow:none; background:transparent; }
+
+.navbar-brand{
+	img{max-height:100%;}
+}
+
+.navbar{margin-bottom:0;border-radius:0;border:0;background-color: #252525; color:#999;
+	.btn-link,.dropdown-toggle{color:#999!important;}
+	.cart-text{padding:15px 0;}
+}
+
+.checkout-button{width:100%;border-bottom-left-radius:0;border-bottom-right-radius:0;padding-bottom:10px;padding-top:10px;}

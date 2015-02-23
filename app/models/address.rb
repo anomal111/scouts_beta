@@ -1,6 +1,6 @@
 class Address < ActiveRecord::Base
   
-  attr_accessible :name, :surname, :street, :house_number, :apartment_number, :zip_code, :city
+  attr_accessible :name, :surname, :street, :house_number, :apartment_number, :zip_code, :city, :order_id
   belongs_to :order, :polymorphic => true
 
   validates :name, presence: true

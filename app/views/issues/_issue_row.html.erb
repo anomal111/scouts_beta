@@ -1,27 +1,49 @@
-<div class="col-xs-12 col-sm-6 col-md-4">
+<div class="col-xs-12 col-sm-6 col-md-4 single-issue-grid">
 <div class="well">
 
   <div class="row">
-		<div class="col-xs-4">
+		<div class="col-sm-6">
 			<%= image_tag issue.picture.url(:thumb) %>
 		</div>
-    <div class="col-xs-4">
-      <h4><%= issue.title %></h4>
-			<p><%= issue.mark %></p>
-			<p><%= issue.date %></p>
+    <div class="col-sm-6">
+      <h4 class="text-right"><%= issue.title %></h4>
+			<p class="text-right"><%= issue.mark %></p>
+			<p class="text-right"><%= issue.date %></p>
     </div>
-    <div class="col-xs-4">
-      
-      <%= form_for order_item, remote: true do |f| %>
-      <h4 class="text-right">Cena: <span style="color: green"><%= number_to_currency issue.price %></span></h4>
-        <div class="input-group">
-          <%= f.number_field :quantity, value: 1, class: "form-control", min: 1 %>
-          <%= f.hidden_field :issue_id, value: issue.id %>
-          <!--<%= f.submit "Do koszyka", class: "btn btn-success btn-lg" %>-->
-					<button type="submit" class="btn btn-success btn-lg"><i class="fa fa-cart-plus"></i> Do koszyka</button>
-        </div>
-      <% end %>
-    </div>
+		</div>
+		<div class="row">
+	    <div class="col-xs-12">
+				<h4 class="text-right">Cena: <span style="color: green"><%= number_to_currency issue.price %></span></h4>
+				<% if issue.volume > 100 %>
+					<p class="text-success text-right">
+				<% end %>
+				<% if issue.volume <= 100 and issue.volume >= 10 %>
+					<p class="text-right"> 
+				<% end %>
+				<% if issue.volume < 10 %>
+					<p class="text-danger text-right">
+				<% end %>
+					<small>Dostępność: <%= issue.volume %>szt.</small>
+				</p>
+	      <%= form_for order_item, :html => {:class => 'form-horizontal'}, remote: true do |f| %>
+	      
+	        <div class="form-group">
+						<%= f.label :quantity, 'Ilość:', :class => 'col-sm-4 control-label' %>
+						<div class="col-sm-8">
+	          	<%= f.number_field :quantity, value: 1, class: "form-control", min: 1 %>
+						</div>
+	          <%= f.hidden_field :issue_id, value: issue.id %>
+					</div>
+	          <!--<%= f.submit "Do koszyka", class: "btn btn-success btn-lg" %>-->
+				    <div class="form-group">
+							<div class="col-sm-12">
+				      	<button type="submit" class="btn btn-success btn-lg"><i class="fa fa-cart-plus"></i> Do koszyka</button>
+							</div>
+				    </div>
+						
+						
+	      <% end %>
+	    </div>
     
   </div>
 </div>

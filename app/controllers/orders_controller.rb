@@ -4,7 +4,9 @@ class OrdersController < ApplicationController
   # GET /orders
   # GET /orders.json
   def index
-    @orders = Order.all
+    if current_user
+      @orders = Order.where("user_id = ?", current_user.id)
+    end
   end
 
   # GET /orders/1
@@ -52,7 +54,7 @@ class OrdersController < ApplicationController
     respond_to do |format|
       if @order.update(order_params)
         session[:order_id]=nil
-        format.html { redirect_to root_path, notice: 'Order was successfully updated.' }
+        format.html { redirect_to root_path, notice: 'Dziękujemy za złożenie zamówienia!' }
         format.json { render :show, status: :ok, location: @order }
       else
         format.html { render :edit }
@@ -81,7 +83,7 @@ class OrdersController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def order_params
-    params.require(:order).permit(:status, :total, :payment, :subtotal, :tax, :shipping, :user_id, address_attributes: [:id, :order_id, :name, :surname, :street, :house_number, :apartment_number, :city, :zip_code])
+    params.require(:order).permit(:status, :total, :payment, :subtotal, :tax, :shipping, :user_id, :created_at, address_attributes: [:id, :order_id, :name, :surname, :street, :house_number, :apartment_number, :city, :zip_code])
   end
 
 

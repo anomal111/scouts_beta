@@ -5,8 +5,8 @@ class CreateOrders < ActiveRecord::Migration
       t.decimal :tax
       t.decimal :shipping
       t.decimal :total
-      t.references :order_status, index: true
-
+      t.string  :status
+      
       t.timestamps
     end
   end

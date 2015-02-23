@@ -1,0 +1,9 @@
+<%= form_for @order, :url => admin_order_path(@order) do |f| %>
+    <!-- kod wyświetlający błędy -->
+    <p>
+      <%= f.label :payment %> <br />
+      <%= f.date_select :payment, {:order => [:day, :month, :year],:prompt => true, :start_year => Time.now.year  } %>
+
+    <p><%= f.submit "Submit" %> </p>
+<% end %>
+

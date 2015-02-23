@@ -1,10 +1,12 @@
 class OrderItem < ActiveRecord::Base
   belongs_to :issue
   belongs_to :order
-  attr_accessible :quantity, :issue_id, :order_id, :unit_price, :total_price
+  attr_accessible :quantity, :issue_id, :order_id, :unit_price, :total_price, :sent
   validates :quantity, presence: true, numericality: { only_integer: true, greater_than: 0 }
   validate :issue_present
   validate :order_present
+  
+  SENTS = [['Tak', true], ['Nie', false]]
 
   before_save :finalize
 

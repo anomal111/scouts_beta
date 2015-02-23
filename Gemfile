@@ -56,6 +56,9 @@ gem 'protected_attributes'
 # ActiveAdmin
 gem 'activeadmin', github: 'activeadmin'
 
+# ActiveAdmin skin
+gem 'active_skin'
+
 # File upload
 gem 'paperclip'
 

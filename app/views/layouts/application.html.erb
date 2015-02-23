@@ -2,12 +2,15 @@
 <html>
 <head>
   <title>ScoutsBeta</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+	<%= favicon_link_tag 'favicons/favicon.ico' %>
+	<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,700&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
 </head>
 <body>
-  <div class="container-fluid">
+  <div class="container">
 		<div class="row">
         
 	  
@@ -19,43 +22,77 @@
 		      <span class="icon-bar"></span>
 		      <span class="icon-bar"></span>
 		    </button>
-		    <%= link_to "Krajki ZHR", root_path, class: "navbar-brand" %>
+		    <%= link_to image_tag("logo_small.png"), root_path, class: "navbar-brand" %>
 		  </div>
 			
 			<div class="collapse navbar-collapse" id="primary-nav">
 				<ul class="nav navbar-nav">
+					<li><%= link_to "Strona Główna", root_path%></li>
 				  <% if current_user %>
-						<li class="dropdown">
-					  	<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Profil <span class="caret"></span></a>
-					    	<ul class="dropdown-menu" role="menu">
-					         <li><%= link_to "Edytuj profil", edit_user_path(current_user.id) %></li>
-					         <li><%= link_to "Wyloguj", :logout %></li>
-					         <li><a href="#">Something else here</a></li>
-					         <li class="divider"></li>
-					         <li><a href="#">Separated link</a></li>
-					         <li class="divider"></li>
-					         <li><a href="#">One more separated link</a></li>
-					        </ul>
-					      </li>
-				  <% else %>
+		         <li><%= link_to "Edytuj profil", edit_user_path(current_user.id) %></li>
+		         <li><%= link_to "Historia zamówień", orders_path %></li>
+		         <li><%= link_to "Wyloguj", :logout %></li>
+					<% else %>
 				      <li><%= link_to "Zarejestruj się", new_user_path %></li>
 				      <li><%= link_to "Zaloguj się", :login %></li>
 				  <% end %>
 				</ul>
+				<div class="nav navbar-nav navbar-right">
+					<ul class="nav navbar-nav">
+						<li><div class="cart-text"><%= render 'layouts/cart_text' %></div></li>
+					</ul>
+				</div>
 			</div>
-			<div class="nav navbar-nav navbar-right">
-				<div class="cart-text"><%= render 'layouts/cart_text' %></div>
-			</div>
+			
 	  </nav>
     </div>
-	<div class="row">
-		<div class="col-xs-6">
-			<div class="messages"></div>
+	</div>
+	
+	<div class="container content">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="messages"></div>
+				<p id="notice"><%= notice %></p>
+			</div>
+		</div>
+    <%= yield %>
+	</div>
+	<div class="container footer">
+		<div class="row">
+			<div class="col-xs-12 col-md-3">
+				<%= link_to image_tag("logo_small.png"), root_path, :class => "footer-logo" %>
+			</div>
+			<div class="col-xs-12 col-md-9">
+				<div class="row">
+					<div class="col-xs-6 col-md-6 text-right">
+						<%= link_to image_tag("epi.png"), "http://www.epi.uj.edu.pl", :class => "footer-logo" %>
+					</div>
+					<div class="col-xs-6 col-md-6 text-right">
+						<%= link_to image_tag("uj.png"), "http://www.uj.edu.pl", :class => "footer-logo" %>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="footer-desc">
+							<p class="text-right">
+								<a href="https://www.facebook.com/oli.peech">
+									<i class="fa fa-facebook-official"></i>
+								</a> 
+								<a href="https://www.linkedin.com/profile/public-profile-settings?trk=prof-edit-edit-public_profile">
+									<i class="fa fa-linkedin"></i>
+								</a>
+								<a href="mailto:agustkiewicz@gmail.com">
+									<i class="fa fa-envelope"></i>
+								</a>
+								Projekt i wykonanie: Aleksander Gustkiewicz 2015 <i class="fa fa-copyright"></i>
+							</p>
+							<p class="text-right">Uniwersytet Jagielloński, Wydział Zarządzania i Komunikacji Społecznej, Elektroniczne Przetwarzanie Informacji</p>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
-    <hr>
-    <%= yield %>
-  </div>
 
 </body>
 </html>

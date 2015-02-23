@@ -51,8 +51,6 @@
         <% end %>
         <h4 class="text-right">Suma:
           <%= "#{number_to_currency current_order.subtotal}" %></h4>
-        <h4 class="text-right">Podatek VAT:
-          <%= "#{number_to_currency current_order.tax}" %></h4>
         <h4 class="text-right">Dostawa:
           <%= "#{number_to_currency current_order.shipping}" %></h4>
         <h4 class="text-right">Suma całkowita: <span style="color: green">
@@ -74,50 +72,49 @@
               </ul>
             </div>
         <% end %>
-				
         <h1>Adres</h1>
         <%= o.fields_for :address do |b| %>
             <div class="form-group">
-              <%= b.label :name, :class => 'col-sm-2 control-label' %>
+              <%= b.label :name, "Imię", :class => 'col-sm-2 control-label' %>
               <div class="col-sm-10">
                 <%= b.text_field :name, id: 'name', :class => 'form-control' %>
               </div>
             </div>
             <div class="form-group">
-              <%= b.label :surname, :class => 'col-sm-2 control-label' %>
+              <%= b.label :surname, "Nazwisko", :class => 'col-sm-2 control-label' %>
               <div class="col-sm-10">
                 <%= b.text_field :surname, :class => 'form-control' %>
               </div>
             </div>
 
             <div class="form-group">
-              <%= b.label :street, :class => 'col-sm-2 control-label' %>
+              <%= b.label :street, "Ulica", :class => 'col-sm-2 control-label' %>
               <div class="col-sm-10">
                 <%= b.text_field :street, :class => 'form-control' %>
               </div>
             </div>
 
             <div class="form-group">
-              <%= b.label :house_number, :class => 'col-sm-2 control-label' %>
+              <%= b.label :house_number, "Nr budynku", :class => 'col-sm-2 control-label' %>
               <div class="col-sm-10">
                 <%= b.text_field :house_number, :class => 'form-control' %>
               </div>
             </div>
             <div class="form-group">
-              <%= b.label :apartment_number, :class => 'col-sm-2 control-label' %>
+              <%= b.label :apartment_number, "Nr lokalu", :class => 'col-sm-2 control-label' %>
               <div class="col-sm-10">
                 <%= b.text_field :apartment_number, :class => 'form-control' %>
               </div>
             </div>
             <div class="form-group">
-              <%= b.label :city, :class => 'col-sm-2 control-label' %>
+              <%= b.label :city, "Miasto", :class => 'col-sm-2 control-label' %>
               <div class="col-sm-10">
                 <%= b.text_field :city, :class => 'form-control' %>
               </div>
             </div>
 
             <div class="form-group">
-              <%= b.label :zip_code, :class => 'col-sm-2 control-label' %>
+              <%= b.label :zip_code, "Kod pocztowy", :class => 'col-sm-2 control-label' %>
               <div class="col-sm-10">
                 <%= b.text_field :zip_code, :class => 'form-control' %>
               </div>
@@ -130,7 +127,7 @@
         <%end%>
 
         <% if current_user && current_user.role == 'koordynator' %>
-            <div class="form-group">
+            <div class="form-group" -->
               <%= o.label "Tarmin zapłaty", :class => 'col-sm-2 control-label' %>
               <div class="col-sm-10">
               <%= o.date_select :payment, :class => 'form-control' %>

@@ -1,27 +1,75 @@
-<h1>Listing orders</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Status</th>
-      <th>Payment</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @orders.each do |order| %>
-      <tr>
-        <td><%= order.status %></td>
-        <td><%= order.payment %></td>
-        <td><%= link_to 'Show', order %></td>
-        <td><%= link_to 'Edit', edit_order_path(order) %></td>
-        <td><%= link_to 'Destroy', order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Order', new_order_path %>
+<div class="row">
+	<div class="col-md-12">
+		<% if current_user %>
+		<h1>Historia zamówień</h1>
+			<% @orders.each do |order| %>
+			<div class="table-respinsive">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Wartość</th>
+							<th>Cena wysyłki</th>
+							<th>Wartość z wysyłką</th>
+							<th>Status</th>
+							<% if current_user.role == "koordynator" %><th>Termin zapłaty</th><% end %>
+							<th>Data Utworzenia</th>
+						</tr>
+					</thead>
+					<tbody>
+		      <tr class="info">
+		        <td><%= order.subtotal %></td>
+		        <td><%= order.shipping %></td>
+		        <td><%= order.total%></td>
+		        <td><%= order.status %></td>
+						<% if current_user.role == "koordynator" %>
+			        <td>
+								<% if !order.payment.nil? %>
+									<%= order.payment%>
+								<% else %>
+									n/a
+								<% end %>
+							</td>
+						<% end %>
+						<td><%= order.created_at %></td>
+		      </tr>
+					<tr>
+						<td>Dane wysyłki:</td>
+						<% if current_user.role == "koordynator" %><td colspan="5"><% else %><td colspan="4"><% end %>
+							<%= order.address.name %> <%= order.address.surname %>, <%= order.address.street %> <%= order.address.house_number%>/<%= order.address.apartment_number %>, <%= order.address.zip_code %> <%= order.address.city %>
+						</td>
+					</tr>
+					<tr>
+						<% if current_user.role == "koordynator" %><td colspan="6"><% else %><td colspan="5"><% end %>
+							<table class="table table-striped table-hover">
+								<thead>
+									<th>ID Krajki</th>
+									<th>Nazwa Krajki</th>
+									<th>Cena jedn.</th>
+									<th>Ilość</th>
+									<th>Cena</th>
+									<th>Wysłano</th>
+								</thead>
+								<tbody>
+									<% order.order_items.each do |item| %>
+										<tr>
+											<td><%= item.issue_id %></td>
+											<td><%= item.issue.title %></td>
+											<td><%= item.unit_price %></td>
+											<td><%= item.quantity %></td>
+											<td><%= item.total_price %></td>
+											<% if item.sent == "true" %><td class="success">tak<% else %><td>nie<% end %></td>
+										</tr>
+									<% end %>
+								</tbody>
+							</table>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<% end %>
+		<% else %><!-- end of current user -->
+			<p class="error"><%= link_to "Zaloguj się", :login %>, aby podejrzeć historię zamowień!</p>
+		<% end %>
+	</div>
+</div>

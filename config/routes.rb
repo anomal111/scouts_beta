@@ -9,6 +9,10 @@ Rails.application.routes.draw do
 
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
+  
+  get '/admin/orders/:id/change_sent(.:format)' => 'admin/orders#change_sent'
+  #match "/admin/update_passwords" => 'admin/update_passwords#update', via: :post
+  
   get 'user_sessions/new'
 
   get 'user_sessions/create'
