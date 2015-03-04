@@ -34,7 +34,7 @@ class UsersController < ApplicationController
     @user = current_user # makes our views "cleaner" and more consistent
     if @user.update_attributes(params[:user])
       flash[:notice] = "Konto zmodyfikowano pomyślnie."
-      redirect_to account_url
+      redirect_to root_url
     else
       render :action => :edit
     end
