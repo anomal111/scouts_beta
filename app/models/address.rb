@@ -8,7 +8,7 @@ class Address < ActiveRecord::Base
   validates :street, presence: true
   validates :house_number, presence: true, format: { with: /\A[0-9]+[a-zA-Z]?\z/,
                                                     message: "Zły format np. 12,12" }
-  validates :apartment_number
+  #validates :apartment_number, presence: true, numericality: true
 
   validates :zip_code, presence: true, format: { with: /\A[0-9]{2}-[0-9]{3}\z/,
                                               message: "Zły format np. 00-000" }
