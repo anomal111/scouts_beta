@@ -13,10 +13,10 @@ class UsersController < ApplicationController
     # auto-login which can't happen here because
     # the User has not yet been activated
     if @user.save
-      flash[:notice] = "Your account has been created."
+      flash[:notice] = "Konto utworzono pomyślnie!"
       redirect_to root_url
     else
-      flash[:notice] = "There was a problem creating you."
+      flash[:notice] = "Wystąpił problem, spróbuj ponownie później."
       render :action => :new
     end
 
@@ -33,7 +33,7 @@ class UsersController < ApplicationController
   def update
     @user = current_user # makes our views "cleaner" and more consistent
     if @user.update_attributes(params[:user])
-      flash[:notice] = "Account updated!"
+      flash[:notice] = "Konto zmodyfikowano pomyślnie."
       redirect_to account_url
     else
       render :action => :edit
