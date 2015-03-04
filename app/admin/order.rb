@@ -15,13 +15,13 @@ ActiveAdmin.register Order do
     selectable_column
     id_column
     column :created_at
-    column :subtotal
-    column :total
+    column "Cena bez wysyłki", :subtotal
+    column "Cena z wysyłką", :total
     column :status #order.status == 'w realizacji'
     column 'Edycja statusu' do |order|
       link_to 'Zmień status', change_status_admin_order_path(order)
     end
-    column :payment
+    column "Data płatności", :payment
     column 'Edycja daty płatności' do |order|
       #if order.status == 'zapłacone'
       if !order.payment.nil?
@@ -38,19 +38,24 @@ ActiveAdmin.register Order do
       row :id
       row :status
       row :created_at
-      row :subtotal
-      row :payment
-      row :shipping
-      row :total
+      row "Data płatności" do
+        order.payment
+      end
+      row "Cena bez wysyłki" do
+        order.subtotal
+      end
+      row "Cena z wysyłką" do
+        order.total
+      end
       @address = Address.where(shipping_id: params[:id]).first
       table_for @address do
-        column :name
-        column :surname
-        column :street
-        column :house_number
-        column :apartment_number
-        column :zip_code
-        column :city
+        column "Imię", :name
+        column "Nazwisko", :surname
+        column "Ulica", :street
+        column "Numer domu", :house_number
+        column "Numer lokalu", :apartment_number
+        column "Kod pocztowy", :zip_code
+        column "Miasto", :city
       end
 
       table_for order.order_items do
