@@ -1,5 +1,6 @@
 ActiveAdmin.register User do
   menu :label => "Użytkownicy"
+  menu :url => "/12_gustkiewicz/krajka/admin/users"
   actions :all, :change_role,  :except => [:edit, :create, :new]
   permit_params :login, :password, :password_confirmation, :email, :admin, :role, :address
   

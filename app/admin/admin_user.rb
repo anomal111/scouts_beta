@@ -1,5 +1,6 @@
 ActiveAdmin.register AdminUser do
   menu :label => "Administratorzy"
+  menu :url => "/12_gustkiewicz/krajka/admin/admin_users"
   permit_params :email, :password, :password_confirmation
   
   index do

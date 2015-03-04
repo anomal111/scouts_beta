@@ -1,5 +1,6 @@
 ActiveAdmin.register Order do
   menu :label => "Zamówienia"
+  menu :url => "/12_gustkiewicz/krajka/admin/orders"
   permit_params :subtotal, :shipping, :total, :payment, :status, :sent,
     order_item_attributes: [:sent, :order_id],
     address_attributes: [:name, :surname, :street, :building_number, :apartment_number, :city, :zip_code]
