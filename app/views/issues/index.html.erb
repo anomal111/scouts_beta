@@ -7,3 +7,34 @@
     <% end %>
   </div>
 </div>
+
+<script>
+$(document).ready(function(){
+ 	var highestBox = 0;
+  setTimeout(function(){
+		$('.issue-picture img').each(function(){  
+			if($(this).height() > highestBox){
+				highestBox = $(this).height(); 
+			} 
+			//console.log($(this).height());
+	  });  
+		$('.issue-picture').each(function(){
+			$(this).height(highestBox);
+		});
+  }, 300);
+	
+	$(window).resize(function(){
+		var highestBox = 0;
+		$('.issue-picture img').each(function(){  
+			if($(this).height() > highestBox){
+				highestBox = $(this).height(); 
+			} 
+			//console.log($(this).height());
+	  });  
+		$('.issue-picture').each(function(){
+			$(this).height(highestBox);
+		});
+	});
+	
+});
+</script>

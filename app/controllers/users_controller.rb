@@ -16,7 +16,7 @@ class UsersController < ApplicationController
       flash[:notice] = "Konto utworzono pomyślnie!"
       redirect_to root_url
     else
-      flash[:notice] = "Wystąpił problem, spróbuj ponownie później."
+      flash[:alert] = "Wystąpił problem, spróbuj ponownie później."
       render :action => :new
     end
 

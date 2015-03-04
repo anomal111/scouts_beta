@@ -1,13 +1,27 @@
-<h1>Login</h1>
-<%= form_for @user_session, :as => :user_session, :url => { :action => "create" } do |f| %>
-   <%= render "shared/error_messages", :target => @user_session %>
-  <%= f.label :login %><br />
-  <%= f.text_field :login %><br />
-  <br />
-  <%= f.label :password %><br />
-  <%= f.password_field :password %><br />
-  <br />
-  <%= f.check_box :remember_me %><%= f.label :remember_me %><br />
-  <br />
-  <%= f.submit "Login" %>
-<% end %>
+<div class="row">
+	<div class="col-md-12">
+		<h1>Logowanie</h1>
+		<%= form_for @user_session, :as => :user_session, :html => {:class => 'form-horizontal'}, :url => { :action => "create" } do |f| %>
+		  <%= render "shared/error_messages", :target => @user_session %>
+			<div class="form-group">
+			  <%= f.label :login, :class => 'col-sm-2 control-label' %>
+				<div class="col-sm-10">
+			  	<%= f.text_field :login, :class => 'form-control' %>
+				</div>
+			</div>
+		  <div class="form-group">
+			  <%= f.label :password, 'Hasło', :class => 'col-sm-2 control-label' %>
+				<div class="col-sm-10">
+					<%= f.password_field :password, :class => 'form-control' %>
+				</div>
+			</div>
+		  <div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+					<%= f.check_box :remember_me %> <%= f.label :remember_me, "Pamiętaj mnie" %>
+				</div>
+			</div>
+  
+		  <%= f.submit "Zaloguj się", :class => "btn btn-success checkout-button" %>
+		<% end %>
+	</div>
+</div>

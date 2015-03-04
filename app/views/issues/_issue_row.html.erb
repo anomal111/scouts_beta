@@ -2,13 +2,15 @@
 <div class="well">
 
   <div class="row">
-		<div class="col-sm-6">
-			<%= image_tag issue.picture.url(:thumb) %>
+		<div class="col-sm-12 text-center issue-picture">
+			<%= image_tag issue.picture.url(:medium), :class => 'img-responsive' %>
 		</div>
-    <div class="col-sm-6">
-      <h4 class="text-right"><%= issue.title %></h4>
-			<p class="text-right"><%= issue.mark %></p>
-			<p class="text-right"><%= issue.date %></p>
+	</div>
+	<div class="row">
+    <div class="col-sm-12">
+      <h3><%= issue.title %></h4>
+			<p class="text-right">Oznaczenie: <span class="text-muted"><%= issue.mark %></span></p>
+			<p class="text-right">Data wydania: <span class="text-muted"><%= issue.date %></span></p>
     </div>
 		</div>
 		<div class="row">
