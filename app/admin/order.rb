@@ -116,7 +116,7 @@ ActiveAdmin.register Order do
   controller do
     def change_sent
       @item = OrderItem.find(params[:id])
-      if @item.sent == 'false'
+      if @item.sent.to_s == 'false'
         @sent = 'true'
       else
         @sent = 'false'
